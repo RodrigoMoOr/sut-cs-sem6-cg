@@ -22,6 +22,9 @@ public class GameController : MonoBehaviour
     {
         playerController.onEncounter += StartBattle;
         battleSystem.onBattleQuit += ExitBattle;
+        DialogManager.Instance.onDialogStart += StartDialog;
+        DialogManager.Instance.onDialogEnd += ExitDialog;
+        
     }
 
 
@@ -43,7 +46,15 @@ public class GameController : MonoBehaviour
     }
 
     
-
+    void StartDialog()
+    {
+        gameState = GameState.Dialog;
+    }
+    void ExitDialog()
+    {
+        if(gameState==GameState.Dialog)
+        gameState = GameState.FreeRoam;
+    }
 
     private void Update()
     {
