@@ -90,6 +90,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -632,6 +633,29 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      10_basic_message_boxes_by_CharlesGabriel_0: -667228130818228280
+      10_basic_message_boxes_by_CharlesGabriel_4: -8027482733447494100
+      10_basic_message_boxes_by_CharlesGabriel_12: 4633198954742961809
+      10_basic_message_boxes_by_CharlesGabriel_5: 3130792667947469175
+      10_basic_message_boxes_by_CharlesGabriel_19: 794420985318611756
+      10_basic_message_boxes_by_CharlesGabriel_1: 2946006932941164955
+      10_basic_message_boxes_by_CharlesGabriel_7: 7980608862010455916
+      10_basic_message_boxes_by_CharlesGabriel_18: -3900252330760794663
+      10_basic_message_boxes_by_CharlesGabriel_2: 2101544004827362260
+      10_basic_message_boxes_by_CharlesGabriel_6: 3198334698482860189
+      10_basic_message_boxes_by_CharlesGabriel_8: -3749015192167634514
+      10_basic_message_boxes_by_CharlesGabriel_20: -7025003327830730175
+      10_basic_message_boxes_by_CharlesGabriel_21: 2182521273938061018
+      10_basic_message_boxes_by_CharlesGabriel_9: -3299060970609651447
+      10_basic_message_boxes_by_CharlesGabriel_14: -214064581529403482
+      10_basic_message_boxes_by_CharlesGabriel_17: 6765847874729596110
+      10_basic_message_boxes_by_CharlesGabriel_11: -4760705794646329409
+      10_basic_message_boxes_by_CharlesGabriel_13: 7263604427078360365
+      10_basic_message_boxes_by_CharlesGabriel_3: 8050739248965923957
+      10_basic_message_boxes_by_CharlesGabriel_10: 3073417674658988885
+      10_basic_message_boxes_by_CharlesGabriel_15: -4923604348370643427
+      10_basic_message_boxes_by_CharlesGabriel_16: 9173541424580266913
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

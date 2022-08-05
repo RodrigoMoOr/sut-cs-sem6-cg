@@ -9,16 +9,26 @@ public class BattleHud : MonoBehaviour
     [SerializeField] HPBar hpBar;
     [SerializeField] MPBar mpBar;
     [SerializeField] bool isPlayer;
+    [SerializeField] Image playerImage;
+    [SerializeField] Image enemyImage;
 
-    public void SetData()
+    public void Awake()
     {
-        if (isPlayer)
+        playerImage = GameObject.Find("PlayerImage").GetComponent<Image>();
+        enemyImage = GameObject.Find("EnemyImage").GetComponent<Image>();
+    }
+
+    public void SetData(Boss boss = null)
+    {
+        if (!boss)
         {
-            text.text = PlayerStats.Instance.getPlayerName();
+            text.text = PlayerStats.Instance.Name;
+            playerImage.sprite = PlayerStats.Instance.PlayerImage;
         }
         else
         {
-            text.text = "Monster";
+            text.text = boss.Name;
+            enemyImage.sprite = boss.BattleImage;
         }
         hpBar.SetHP(0.5f/1f);
         mpBar.SetMP(0.5f / 1f);
