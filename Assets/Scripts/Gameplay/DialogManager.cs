@@ -25,6 +25,36 @@ public class DialogManager : MonoBehaviour
     }
 
 
+    public IEnumerator ShowDialogText(string text, bool waitForInput = true, bool autoClose = true,
+    List<string> choices = null, Action<int> onChoiceSelected = null)
+    {
+        onDialogStart?.Invoke();
+        dialogBox.SetActive(true);
+        
+        yield return TypeDialog(text);
+        if (waitForInput)
+        {
+            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Z));
+        }
+
+        //if (choices != null && choices.Count > 1)
+        //{
+        //    yield return choiceBox.ShowChoices(choices, onChoiceSelected);
+        //}
+
+        if (autoClose)
+        {
+            CloseDialog();
+        }
+        onDialogEnd?.Invoke();
+    }
+
+    public void CloseDialog()
+    {
+        dialogBox.SetActive(false);
+    }
+
+
     public IEnumerator ShowDialog(Dialog dialog)
     {
         yield return new WaitForEndOfFrame();

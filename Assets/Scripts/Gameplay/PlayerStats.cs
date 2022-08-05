@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -9,30 +11,63 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] int health;
     [SerializeField] int maxHealth;
 
+    [SerializeField] int mana;
+    [SerializeField] int maxMana;
+    [SerializeField] int ectsPoints = 0;
+    [SerializeField] Sprite playerBattleImage;
+
+    [SerializeField] List<MoveBase> moves;
+
     public static PlayerStats Instance { get; private set; }
+
+
     private void Awake()
     {
         Instance = this;
     }
 
+    public string Name => playerName;
+    public int Health => health;
+    public int MaxHealth => maxHealth;
+    public int Mana => mana;
+    public int MaxMana => maxMana;
+    public int ECTS => ectsPoints;
+    public List<MoveBase> Move => moves;
 
-    public void setPlayerName(string name)
+    public Sprite PlayerImage => playerBattleImage;
+
+
+    
+    public void AddHP(int amount)
     {
-        playerName = name;
+        health += amount;
+        if (health > maxHealth)
+        {
+            health = maxHealth;
+        }
     }
 
-    public void setHealth(int hp)
+    public void AddECTS(int amount)
     {
-        health = hp;
+        ectsPoints+= amount;
     }
 
-    public string getPlayerName()
+    public bool GetDamage(int amount)
     {
-        return playerName;
+        health -= amount;
+        if(health <= 0)
+        {
+            return true;
+        }
+        else return false;
     }
 
-    public int getHealth()
+    public void AddMP(int amount)
     {
-        return health;
+        mana += amount;
+        if (mana > maxMana)
+        {
+            mana = maxMana;
+        }
     }
 }

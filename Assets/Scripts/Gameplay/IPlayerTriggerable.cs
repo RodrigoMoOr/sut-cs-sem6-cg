@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface Interactable
+public interface IPlayerTriggerable
 {
-    IEnumerator Interact(Transform initiator);
+    void OnTrigger(PlayerController player);
 }

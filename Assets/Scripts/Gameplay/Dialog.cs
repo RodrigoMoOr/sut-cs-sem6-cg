@@ -14,8 +14,11 @@ public class Dialog
         get { return lines; }
     }
 
-    public Dialog(string lines)
-    {
-        this.lines = new List<string>();
-    }
+    //public Dialog(string lines)
+    //{
+    //    this.lines = new List<string>
+    //    {
+    //        lines
+    //    };
+    //}
 }

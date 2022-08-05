@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public LayerMask solidObjectsLayer;
     public LayerMask interactableLayer;
 
-    public event Action onEncounter;
+    public event Action<Boss> onEncounter;
 
 
     float horizontalInput;
@@ -41,6 +41,8 @@ public class PlayerController : MonoBehaviour
             transform.position = transform.position + new Vector3(horizontalInput * movementSpeed * Time.deltaTime, verticalInput * movementSpeed * Time.deltaTime);
         }
 
+        CheckForTriggerables();
+        
 
         if (Input.GetKeyDown(KeyCode.Z))
             Interact();
@@ -58,26 +60,42 @@ public class PlayerController : MonoBehaviour
     }
 
 
+    private void CheckForTriggerables()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.4f, GameLayers.i.TriggerableLayers);
+
+        foreach (Collider2D collider in colliders)
+        {
+            IPlayerTriggerable triggerable = collider.GetComponent<IPlayerTriggerable>();
+            if (triggerable != null)
+            {
+                triggerable.OnTrigger(this);
+                break;
+            }
+        }
+    }
+
+    
     void Interact()
     {
         var facingDirection = new Vector3(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
         var interactPosition = transform.position + facingDirection;
 
-        //Debug.DrawLine(transform.position, interactPosition, Color.green, 0.5f);
+        Debug.DrawLine(transform.position, interactPosition, Color.green, 0.5f);
 
-        var collider = Physics2D.OverlapCircle(interactPosition, 0.4f, interactableLayer);
+        var collider = Physics2D.OverlapCircle(interactPosition, 0.4f, GameLayers.i.InteractableLayer);
         if (collider)
         {
             if (collider.gameObject.tag == "Boss")
             {
                 Debug.Log("Boss");
-                onEncounter();
-                collider.gameObject.GetComponent<Interactable>()?.Interact();
+                onEncounter(collider.gameObject.GetComponent<Boss>());
+                StartCoroutine(collider.gameObject.GetComponent<Interactable>()?.Interact(transform));
             }
             else if (collider.gameObject.tag == "NPC")
             {
-                Debug.Log("NPC");
-                collider.GetComponent<Interactable>()?.Interact();
+                Debug.Log("NPCd");
+                StartCoroutine(collider.gameObject.GetComponent<Interactable>()?.Interact(transform));
             }
 
 
