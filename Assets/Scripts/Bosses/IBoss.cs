@@ -14,4 +14,10 @@ public interface IBoss
     int Damage { get; set; }
 
     int Defense { get; set; }
+
+
+
+    public void Attack();
+
+
 }

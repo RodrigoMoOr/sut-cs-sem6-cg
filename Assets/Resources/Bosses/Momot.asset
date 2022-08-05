@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f6d24c60457207f4b92930f1e48fe963, type: 3}
-  m_Name: U.L.A
+  m_Name: Momot
   m_EditorClassIdentifier: 
-  bossName: U.L.A
-  bossDescription: Here IS ULA
-  maxHealth: 100
-  damage: 0
-  defense: 0
-  bossNPCSprite: {fileID: 21300000, guid: c0f51be79a771274aae3b618877ee90c, type: 3}
-  bossBattleImage: {fileID: 21300000, guid: e27870f1d00fe5044849b49efdd582c3, type: 3}
+  bossName: Momot
+  bossDescription: This is MOMOT
+  maxHealth: 900
+  damage: 10
+  defense: 20
+  bossNPCSprite: {fileID: 21300000, guid: 0b5db976401f9d845965540c86dd4833, type: 3}
+  bossBattleImage: {fileID: 21300000, guid: 3e90ad7b7274d4c40b129513ebcd7e48, type: 3}
   possibleAttacks:
   - {fileID: 11400000, guid: a789bc7eeae8245468c875e6ed4bbe3a, type: 2}
