@@ -17,6 +17,7 @@ public class Boss : MonoBehaviour
      Sprite bossBattleImage;
 
     public int current_health;
+    public float health_procent;
     
     List<AttackBase> possibleAttacks;
     SpriteRenderer sprite_renderer;
@@ -25,6 +26,7 @@ public class Boss : MonoBehaviour
     public string Description => bossDescription;
 
     public Sprite BattleImage => bossBattleImage;
+    public float HealthProcent => health_procent;
 
     
 
@@ -62,11 +64,13 @@ public class Boss : MonoBehaviour
     public bool GetDamage(int amount)
     {
         current_health -= amount;
-        if(current_health < 0)
+        health_procent = (float)current_health / (float)boss.maxHealth;
+        if (current_health <= 0)
         {
             return true;
         }
         else return false;
     }
+
 }
 

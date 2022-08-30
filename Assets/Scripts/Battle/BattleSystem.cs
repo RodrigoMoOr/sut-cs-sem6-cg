@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 
 public enum BattleState
@@ -11,8 +12,7 @@ public enum BattleState
     MOVE_SELECTION,
     PLAYER_TURN,
     ENEMY_TURN,
-    WON,
-    LOST
+    END
 }
 
 public class BattleSystem : MonoBehaviour
@@ -20,9 +20,9 @@ public class BattleSystem : MonoBehaviour
 
     [SerializeField] BattleHud playerHud;
     [SerializeField] BattleHud enemyHud;
-    
+
     [SerializeField] BattleDialogBox battleDialogBox;
-    
+
     //Bosss passed in GameController.cs with SetBossData() function here
     [SerializeField] Boss boss;
 
@@ -31,11 +31,12 @@ public class BattleSystem : MonoBehaviour
     public BattleState battleState;
 
     MoveBase selectedMove;
+    bool turnRunning = false;
 
     public void Start()
     {
         SetupBattle();
-        
+
     }
 
 
@@ -46,14 +47,14 @@ public class BattleSystem : MonoBehaviour
         enemyHud.SetData(boss);
 
 
-        StartCoroutine(battleDialogBox.TypeDialog("Wild boss appeared!"));
+        StartCoroutine(battleDialogBox.TypeDialog($"Your professor {boss.Name} appeared!"));
         battleState = BattleState.ACTION_SELECTION;
     }
 
 
     public void HandleUpdate()
     {
-       if(battleState == BattleState.ACTION_SELECTION)
+        if (battleState == BattleState.ACTION_SELECTION)
         {
             HandleActionSelection();
         }
@@ -61,22 +62,18 @@ public class BattleSystem : MonoBehaviour
         {
             HandleMoveSelection();
         }
-        else if (battleState == BattleState.PLAYER_TURN)
-        {
-            HandlePlayerTurn();
-        }
-        else if (battleState == BattleState.ENEMY_TURN)
-        {
-            HandleEnemyTurn();
-        }
-        else if (battleState == BattleState.WON)
-        {
-            HandleWin();
-        }
-        else if (battleState == BattleState.LOST)
-        {
-            //HandleLose();
-        }
+        // else if (battleState == BattleState.PLAYER_TURN)
+        // {
+        //     HandlePlayerTurn();
+        // }
+        // else if (battleState == BattleState.ENEMY_TURN)
+        // {
+        //     HandleEnemyTurn();
+        // }
+        //else if (battleState == BattleState.END)
+        // {
+
+        // }
     }
 
     void ActionSelection()
@@ -94,7 +91,7 @@ public class BattleSystem : MonoBehaviour
         battleDialogBox.EnableMoveSelector(true);
     }
 
-   
+
 
     void PlayerTurn()
     {
@@ -108,7 +105,7 @@ public class BattleSystem : MonoBehaviour
     {
         battleState = BattleState.ENEMY_TURN;
     }
-    
+
 
     void HandleActionSelection()
     {
@@ -158,7 +155,8 @@ public class BattleSystem : MonoBehaviour
             {
                 Debug.Log("Move1 TODO");
                 selectedMove = PlayerStats.Instance.Move[battleDialogBox.GetChoice()];
-                PlayerTurn();
+                if(!turnRunning)
+                    StartCoroutine(MakeTurns());
             }
 
         }
@@ -168,36 +166,66 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    void HandlePlayerTurn()
+    private IEnumerator MakeTurns()
     {
-        int damageToDeal = selectedMove.Damage; 
-        if(boss.GetDamage(damageToDeal))
-        {
-            battleState = BattleState.WON;
-            return;
-        }
-        EnemyTurn();
-    }
-    
-    void HandleEnemyTurn()
-    {
-        AttackBase chosenAttack = boss.Attack();
-        int damageToDeal = chosenAttack.Damage;
-        //Sprite attackSprite = chosenAttack.AttackSprite;
+        turnRunning = true;
+        ///////////////PLAYER TURN///////////////////
+        int damageToDeal = selectedMove.Damage;
+        bool isDead = boss.GetDamage(damageToDeal);
 
-        if(PlayerStats.Instance.GetDamage(damageToDeal))
+        StartCoroutine(BattleHud.ShowAttackSprite(selectedMove.MoveSprite));
+        yield return new WaitForSeconds(2f);
+        StartCoroutine(enemyHud.LowerHealthBar(boss.HealthProcent));
+
+
+        if (isDead)
         {
-            battleState = BattleState.LOST;
+            StartCoroutine(HandleWin());
+            turnRunning = false;
         }
-        ActionSelection();
+        else
+        {
+            ///////////////BOSS TURN/////////////////////
+            AttackBase chosenAttack = boss.Attack();
+            damageToDeal = chosenAttack.Damage;
+
+            bool isPlayerDead = PlayerStats.Instance.GetDamage(damageToDeal);
+
+            yield return new WaitForSeconds(1f);
+            StartCoroutine(BattleHud.ShowAttackSprite(chosenAttack.AttackSprite));
+            yield return new WaitForSeconds(2f);
+            StartCoroutine(playerHud.LowerHealthBar(PlayerStats.Instance.HealthProcent));
+
+
+
+            if (isPlayerDead)
+            {
+                StartCoroutine(HandleLose());
+                yield break;
+            }
+            ActionSelection();
+            turnRunning = false;
+        }
     }
 
-    void HandleWin()
+    private IEnumerator HandleLose()
     {
-        Debug.Log("Win!!!!!");
+        StartCoroutine(battleDialogBox.TypeDialog("You Lost the battle!!"));
+        StartCoroutine(playerHud.Kill());
+        yield return new WaitForSeconds(2f);
+        //SOMETHING HERE SHOULD BE??
+        OnBattleQuit();
+    }
+
+    private IEnumerator HandleWin()
+    {
+        StartCoroutine(battleDialogBox.TypeDialog("You Won the battle!!"));
+        StartCoroutine(enemyHud.Kill());
+        yield return new WaitForSeconds(2f);
         boss.gameObject.SetActive(false);
         PlayerStats.Instance.AddECTS(30);
         OnBattleQuit();
+
     }
 
     public void SetBossData(Boss bossg)
