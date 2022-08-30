@@ -10,9 +10,11 @@ public class MoveBase : ScriptableObject
 [SerializeField] string description;
 [SerializeField] int damage;
 [SerializeField] int manaCost;
+[SerializeField] Sprite moveSprite;
 
 public string Name => name;
 public string Description => description;
 public int Damage => damage;
 public int ManaCost => manaCost;
+public Sprite MoveSprite => moveSprite;
 }

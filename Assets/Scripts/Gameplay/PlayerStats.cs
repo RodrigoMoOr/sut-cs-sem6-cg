@@ -21,6 +21,8 @@ public class PlayerStats : MonoBehaviour
     public static PlayerStats Instance { get; private set; }
 
 
+    float healthProcent;
+
     private void Awake()
     {
         Instance = this;
@@ -28,6 +30,8 @@ public class PlayerStats : MonoBehaviour
 
     public string Name => playerName;
     public int Health => health;
+
+    public float HealthProcent => healthProcent;
     public int MaxHealth => maxHealth;
     public int Mana => mana;
     public int MaxMana => maxMana;
@@ -55,6 +59,7 @@ public class PlayerStats : MonoBehaviour
     public bool GetDamage(int amount)
     {
         health -= amount;
+        healthProcent = (float) health/ (float) maxHealth;
         if(health <= 0)
         {
             return true;
