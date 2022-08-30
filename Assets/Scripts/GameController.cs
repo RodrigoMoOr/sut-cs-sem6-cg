@@ -21,7 +21,7 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        
+        Application.targetFrameRate = 30;
         playerController.onEncounter += boss =>
         {
             gameState = GameState.Battle;
