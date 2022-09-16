@@ -6,7 +6,7 @@ using UnityEngine;
 public class MoveBase : ScriptableObject
 {
 
-[SerializeField] string name;
+[SerializeField] new string name;
 [SerializeField] string description;
 [SerializeField] int damage;
 [SerializeField] int manaCost;
