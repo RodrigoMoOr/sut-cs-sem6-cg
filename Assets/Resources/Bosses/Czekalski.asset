@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6d24c60457207f4b92930f1e48fe963, type: 3}
+  m_Name: Czekalski
+  m_EditorClassIdentifier: 
+  bossName: Czekalski
+  bossDescription: 
+  maxHealth: 5000
+  damage: 500
+  bossNPCSprite: {fileID: 21300000, guid: ecfa18749876a774289b3ba23704991f, type: 3}
+  bossBattleImage: {fileID: 21300000, guid: 0007a5cae127f8c42a26204d4fd18aa9, type: 3}
+  bossBattleBackground: {fileID: 21300000, guid: 28996cdd30c866246b1902fa005f8da8, type: 3}
+  possibleAttacks:
+  - {fileID: 11400000, guid: 877cfab7658def34c9760128fc5e1efc, type: 2}
+  - {fileID: 11400000, guid: cb9268ea9143144449d095d205832e87, type: 2}
+  - {fileID: 11400000, guid: 9d4cd14cd29087c42a07cbc42b203ef8, type: 2}
+  - {fileID: 11400000, guid: 88cb9af2641228e4ea67a1c98b365196, type: 2}

@@ -3,74 +3,46 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Boss : MonoBehaviour
 {
 
 
     [SerializeField] BossBase boss;
+    [SerializeField] int targetSize;
+    public BossBase Base => boss;
 
-     string bossName;
-     string bossDescription;
-
-     Sprite bossNPCSprite;
-     Sprite bossBattleImage;
-
-    public int current_health;
-    public float health_procent;
-    
-    List<AttackBase> possibleAttacks;
     SpriteRenderer sprite_renderer;
 
-    public string Name => bossName;
-    public string Description => bossDescription;
-
-    public Sprite BattleImage => bossBattleImage;
-    public float HealthProcent => health_procent;
 
     
 
     public void Awake()
     {
         sprite_renderer = GetComponentInParent<SpriteRenderer>();
-        bossNPCSprite = boss.NPCSprite;
-        bossBattleImage = boss.BattleImage;
 
-        bossName = boss.bossName;
-        bossDescription = boss.bossDescription;
 
     }
     public void Start()
     {
-        current_health = boss.maxHealth;
-        sprite_renderer.sprite = bossNPCSprite;
-        transform.localScale = new Vector3(1,1,1);
-        //sprite_renderer.enabled = true;
-        gameObject.GetComponent<BoxCollider2D>().size = sprite_renderer.sprite.bounds.size;
-        possibleAttacks = boss.PossibleAttacks;
-
-    }
-
-    public AttackBase Attack()
-    {
-        if(possibleAttacks.Count > 0)
+        Scene scene = SceneManager.GetActiveScene();
+        if (scene.buildIndex < PlayerStats.Instance.Reached)
+            Destroy(gameObject);
+        else
         {
-            AttackBase chosenAttack = possibleAttacks.PickRandom();
-            return chosenAttack;
-        }
-        else return default(AttackBase);
-    }
+            sprite_renderer.sprite = boss.NPCSprite;
+            transform.localScale = new Vector3(1, 1, 1);
 
-    public bool GetDamage(int amount)
-    {
-        current_health -= amount;
-        health_procent = (float)current_health / (float)boss.maxHealth;
-        if (current_health <= 0)
-        {
-            return true;
-        }
-        else return false;
-    }
 
+            var bounds = GetComponent<SpriteRenderer>().sprite.bounds;
+            var factor = targetSize / bounds.size.y;
+            transform.localScale = new Vector3(factor, factor, factor);
+
+
+            //sprite_renderer.enabled = true;
+            gameObject.GetComponent<BoxCollider2D>().size = sprite_renderer.sprite.bounds.size;
+        }
+    }
 }
 

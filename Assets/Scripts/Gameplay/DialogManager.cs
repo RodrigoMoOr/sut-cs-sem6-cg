@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class DialogManager : MonoBehaviour
 {
     [SerializeField] GameObject dialogBox;
+    [SerializeField] GameObject dialogImage;
     [SerializeField] Text dialogText;
     [SerializeField] float lettersPerSecond;
 
@@ -25,12 +26,20 @@ public class DialogManager : MonoBehaviour
     }
 
 
-    public IEnumerator ShowDialogText(string text, bool waitForInput = true, bool autoClose = true,
+    public IEnumerator ShowDialogText(string text, Sprite dialogSprite = null, bool waitForInput = true, bool autoClose = true,
     List<string> choices = null, Action<int> onChoiceSelected = null)
     {
         onDialogStart?.Invoke();
         dialogBox.SetActive(true);
-        
+
+        if (dialogSprite != null)
+        {
+            dialogImage.SetActive(true);
+            dialogImage.GetComponent<Image>().sprite = dialogSprite;
+        }
+
+
+
         yield return TypeDialog(text);
         if (waitForInput)
         {
@@ -52,17 +61,29 @@ public class DialogManager : MonoBehaviour
     public void CloseDialog()
     {
         dialogBox.SetActive(false);
+        dialogImage.SetActive(false);
     }
 
 
-    public IEnumerator ShowDialog(Dialog dialog)
+    public IEnumerator ShowDialog(Dialog dialog, Sprite dialogSprite = null)
     {
         yield return new WaitForEndOfFrame();
         
         onDialogStart?.Invoke();
         
+
+
+
         this.dialog = dialog;
         dialogBox.SetActive(true);
+
+        if (dialogSprite != null)
+        {
+            dialogImage.SetActive(true);
+            dialogImage.GetComponent<Image>().sprite = dialogSprite;
+        }
+
+
         StartCoroutine(TypeDialog(dialog.Lines[0]));
     }
 
@@ -102,6 +123,7 @@ public class DialogManager : MonoBehaviour
             {
                 dialogIndex = 0;
                 dialogBox.SetActive(false);
+                dialogImage?.SetActive(false);
                 onDialogEnd?.Invoke();
             }
         }

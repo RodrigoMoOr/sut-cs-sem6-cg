@@ -18,6 +18,9 @@ public class PlayerStats : MonoBehaviour
 
     [SerializeField] List<MoveBase> moves;
 
+    [SerializeField] int reached;
+    [SerializeField] List<QuestBase> completed;
+
     public static PlayerStats Instance { get; private set; }
 
 
@@ -40,6 +43,8 @@ public class PlayerStats : MonoBehaviour
 
     public Sprite PlayerImage => playerBattleImage;
 
+    public List<QuestBase> Completed => completed;
+    public int Reached { get => reached; set => reached = value; }
 
     
     public void AddHP(int amount)
@@ -74,5 +79,10 @@ public class PlayerStats : MonoBehaviour
         {
             mana = maxMana;
         }
+    }
+
+    public void AddMaxHP(int amount)
+    {
+        maxHealth += amount;
     }
 }

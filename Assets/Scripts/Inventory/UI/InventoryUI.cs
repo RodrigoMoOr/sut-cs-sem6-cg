@@ -20,8 +20,8 @@ public class InventoryUI : MonoBehaviour
 
     private Color defaultColor;
 
-    private Color highlightedColor;
     
+    private Color highlightedColor;
     
 
     int selectedItem = 0;

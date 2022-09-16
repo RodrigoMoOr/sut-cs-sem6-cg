@@ -22,10 +22,12 @@ public class Inventory : MonoBehaviour
     
     public ItemBase UseItem(int index)
     {
+
         var item = slots[index].Item;
         item.Use();
         Debug.Log($"used item {item.GetType()}:{item.Name}");
-        RemoveItem(item);
+        if (item.Usable)
+            RemoveItem(item);
         onUpdated?.Invoke();
         return item;
     }
@@ -58,6 +60,16 @@ public class Inventory : MonoBehaviour
             });
         }
         onUpdated?.Invoke();
+    }
+
+    public bool CheckIfExists(ItemBase item)
+    {
+        foreach(ItemSlot slot in slots)
+        {
+            if(slot.Item == item)
+                return true;
+        }
+        return false;
     }
   
 }

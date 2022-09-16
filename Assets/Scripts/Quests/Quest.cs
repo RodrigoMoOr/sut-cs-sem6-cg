@@ -15,15 +15,19 @@ public class Quest
 
     public IEnumerator StartQuest()
     {
-        Status = QuestStatus.Started;
+        if (!PlayerStats.Instance.Completed.Contains(Base))
+        {
+            Status = QuestStatus.Started;
 
-        yield return DialogManager.Instance.ShowDialog(Base.StartDialogue);
+            yield return DialogManager.Instance.ShowDialog(Base.StartDialogue);
+        }
     }
 
 
     public IEnumerator CompleteQuest(Transform player)
     {
         Status = QuestStatus.Completed;
+        PlayerStats.Instance.Completed.Add(Base);
 
         yield return DialogManager.Instance.ShowDialog(Base.CompletedDialogue);
 
@@ -38,9 +42,9 @@ public class Quest
         {
             inventory.AddItem(Base.RewardItem);
 
-            string playerName = player.GetComponent<PlayerStats>().Name;
+            //string playerName = player.GetComponent<PlayerStats>().Name;
 
-            yield return DialogManager.Instance.ShowDialogText($"{playerName} received{Base.RewardItem.Name}");
+            //yield return DialogManager.Instance.ShowDialogText($"{playerName} received{Base.RewardItem.Name}");
         }
     }
 

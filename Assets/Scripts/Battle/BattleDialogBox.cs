@@ -11,10 +11,13 @@ public class BattleDialogBox : MonoBehaviour
     [SerializeField] GameObject actionSelector;
     [SerializeField] GameObject moveSelector;
     [SerializeField] List<Text> actionText;
-    [SerializeField] List<Text> moveText;
+    [SerializeField] Text moveText;
+    [SerializeField] List<MoveBase> movesBase;
     [SerializeField] Color selectionColor;
+    [SerializeField] Text damageText;
 
-    
+
+
     public void SetDialog(string dialog)
     {
         dialogText.text = dialog;
@@ -45,16 +48,16 @@ public class BattleDialogBox : MonoBehaviour
         }
     }
 
-    public void UpdateMoveSelector()
+
+    public void UpdateMoveData()
     {
-        choice = Mathf.Clamp(choice, 0, moveText.Count - 1);
-        for (int i = 0; i < moveText.Count; i++)
+        choice %= movesBase.Count;
+        if (choice < 0)
         {
-            if (i == choice)
-                moveText[i].color = selectionColor;
-            else
-                moveText[i].color = Color.black;
+            choice = movesBase.Count - 1;
         }
+        moveText.text = movesBase[choice].Name;
+        damageText.text = $"DMG:{movesBase[choice].Damage}";
     }
 
     
@@ -62,7 +65,10 @@ public class BattleDialogBox : MonoBehaviour
     {
         return choice;
     }
-    
+    public void ResetChoice()
+    {
+        choice = 0;
+    }
 
     public IEnumerator TypeDialog(string dialog)
     {
@@ -90,16 +96,9 @@ public class BattleDialogBox : MonoBehaviour
     }
     public void EnableMoveSelector(bool enabled)
     {
+        movesBase = PlayerStats.Instance.Move;
         moveSelector.SetActive(enabled);
     }
 
-    public void UpdateMoveTexts()
-    {
-        int i = 0;
-      foreach(MoveBase move in PlayerStats.Instance.Move)
-      {
-        moveText[i].text = move.Name;
-        i++;
-      }
-    }
+
 }

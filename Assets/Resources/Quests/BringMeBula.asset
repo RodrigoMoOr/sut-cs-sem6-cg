@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c36844fc89f473449afebf6247045e4b, type: 3}
+  m_Name: BringMeBula
+  m_EditorClassIdentifier: 
+  name: "Bring Me Bu\u0142a"
+  description: You have to bring your ID to zielu
+  startDialogue:
+    lines:
+    - Can you bring me a chicken sandwich?
+    - Its right there, in the cafeteria
+    - 'Go get it '
+    - Im staaarving!!!!
+  inProgressDialogue:
+    lines:
+    - Man, I'm starving!!! Go get it...
+  completedDialogue:
+    lines:
+    - Hurray!!!!
+    - Youve did it!
+    - Omnomnom, it's so delicious
+  requiredItem: {fileID: 11400000, guid: 8768d324ef080e34fa5a6f65dcf7d223, type: 2}
+  rewardItem: {fileID: 11400000, guid: ebcd8820931077c42916e94ec17393c3, type: 2}

@@ -64,7 +64,7 @@ public class MainMenu : MonoBehaviour
         switch (highlightedOption)
         {
             case 0:
-                SceneManager.LoadScene("SampleScene");
+                SceneManager.LoadScene(2);
                 //Start Game
                 break;
             case 1:

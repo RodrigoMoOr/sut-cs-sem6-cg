@@ -2,13 +2,15 @@ using System;
 using System.Collections.Generic;
 public static class RandomValues
 {
-    public static Random random = new Random();
+    private static Random random = new();
+
+    public static Random Random { get => random; set => random = value; }
 
     public static T PickRandom<T>(this IList<T> source)
     {
         if (source.Count > 0)
         {
-            int randIndex = random.Next(source.Count);
+            int randIndex = Random.Next(source.Count);
             return source[randIndex];
         }
         else return default(T);

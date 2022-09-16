@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boss: {fileID: 0}
-  current_health: 0
+  targetSize: 3
 --- !u!212 &8195602969327334677
 SpriteRenderer:
   m_ObjectHideFlags: 0

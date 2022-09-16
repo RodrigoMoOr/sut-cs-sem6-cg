@@ -6,7 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Quests/Create new quest")]
 public class QuestBase : ScriptableObject
 {
-    [SerializeField] string name;
+    [SerializeField] new string name;
     [SerializeField] string description;
 
     [SerializeField] Dialog startDialogue;

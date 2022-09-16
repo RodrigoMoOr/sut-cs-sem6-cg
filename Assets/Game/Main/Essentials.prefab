@@ -129,6 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogBox: {fileID: 4260311035449021151}
+  dialogImage: {fileID: 3345789156421279326}
   dialogText: {fileID: 5929200840693780056}
   lettersPerSecond: 30
 --- !u!114 &8441361508317889530
@@ -185,6 +186,7 @@ GameObject:
   - component: {fileID: 8441361508558781405}
   - component: {fileID: 8441361508558781406}
   - component: {fileID: 8441361508558781407}
+  - component: {fileID: 2565915006373787412}
   m_Layer: 0
   m_Name: player
   m_TagString: Untagged
@@ -279,7 +281,6 @@ MonoBehaviour:
   interactableLayer:
     serializedVersion: 2
     m_Bits: 128
-  animator: {fileID: 0}
 --- !u!95 &8441361508558781405
 Animator:
   serializedVersion: 4
@@ -288,7 +289,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8441361508558781401}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 9895f7dc68ab52c45881545b6357e38b, type: 2}
   m_CullingMode: 0
@@ -313,14 +314,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerName: AEIStudent
-  health: 900
-  maxHealth: 900
-  mana: 0
-  maxMana: 0
+  health: 1000
+  maxHealth: 1000
+  mana: 250
+  maxMana: 250
   ectsPoints: 0
-  playerBattleImage: {fileID: 21300000, guid: f45031fe342480d4d9fd73a8b8bf877f, type: 3}
+  playerBattleImage: {fileID: 21300000, guid: ac396bb1c206f034c8204eedae051d02, type: 3}
   moves:
   - {fileID: 11400000, guid: ff685815698271baabaaae2e6e114edc, type: 2}
+  - {fileID: 11400000, guid: 569f6fbb23f10c741a1639c3d628b02d, type: 2}
+  - {fileID: 11400000, guid: bdb58be22d150394daba36c07873c8bc, type: 2}
 --- !u!114 &8441361508558781407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333,11 +336,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d03175a5b7553ff4c8e413affb7aaf24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slots:
-  - item: {fileID: 11400000, guid: 8768d324ef080e34fa5a6f65dcf7d223, type: 2}
-    count: 4
-  - item: {fileID: 11400000, guid: ebcd8820931077c42916e94ec17393c3, type: 2}
-    count: 2
+  slots: []
+--- !u!114 &2565915006373787412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8441361508558781401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 052a337ab6a3c2a4a8373631806d79dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkDownSprites:
+  - {fileID: -346726648, guid: 277826572651390469c847467ad04b11, type: 3}
+  - {fileID: 440740844, guid: 277826572651390469c847467ad04b11, type: 3}
+  - {fileID: 770752162, guid: 277826572651390469c847467ad04b11, type: 3}
+  - {fileID: -1285119189, guid: 277826572651390469c847467ad04b11, type: 3}
+  - {fileID: 655443716, guid: 277826572651390469c847467ad04b11, type: 3}
+  - {fileID: -611996456, guid: 277826572651390469c847467ad04b11, type: 3}
+  walkUpSprites:
+  - {fileID: -1523877198, guid: 277826572651390469c847467ad04b11, type: 3}
+  - {fileID: 716483232, guid: 277826572651390469c847467ad04b11, type: 3}
+  - {fileID: 1037243947, guid: 277826572651390469c847467ad04b11, type: 3}
+  - {fileID: 1846908475, guid: 277826572651390469c847467ad04b11, type: 3}
+  - {fileID: -1294540038, guid: 277826572651390469c847467ad04b11, type: 3}
+  - {fileID: 656341350, guid: 277826572651390469c847467ad04b11, type: 3}
+  walkRightSprites:
+  - {fileID: -1796435867, guid: 277826572651390469c847467ad04b11, type: 3}
+  - {fileID: 538349025, guid: 277826572651390469c847467ad04b11, type: 3}
+  - {fileID: -1542783941, guid: 277826572651390469c847467ad04b11, type: 3}
+  - {fileID: -1860829781, guid: 277826572651390469c847467ad04b11, type: 3}
+  - {fileID: -326052247, guid: 277826572651390469c847467ad04b11, type: 3}
+  - {fileID: 461775299, guid: 277826572651390469c847467ad04b11, type: 3}
+  walkLeftSprites:
+  - {fileID: -1986155397, guid: 277826572651390469c847467ad04b11, type: 3}
+  - {fileID: 1569288766, guid: 277826572651390469c847467ad04b11, type: 3}
+  - {fileID: -69948667, guid: 277826572651390469c847467ad04b11, type: 3}
+  - {fileID: 223641578, guid: 277826572651390469c847467ad04b11, type: 3}
+  - {fileID: 902480215, guid: 277826572651390469c847467ad04b11, type: 3}
+  - {fileID: 722317188, guid: 277826572651390469c847467ad04b11, type: 3}
+  idleAnimSprites:
+  - {fileID: 2030210229, guid: 277826572651390469c847467ad04b11, type: 3}
+  - {fileID: -1541397353, guid: 277826572651390469c847467ad04b11, type: 3}
+  - {fileID: -2143850899, guid: 277826572651390469c847467ad04b11, type: 3}
+  - {fileID: -467914177, guid: 277826572651390469c847467ad04b11, type: 3}
+  - {fileID: -454742562, guid: 277826572651390469c847467ad04b11, type: 3}
+  - {fileID: 1908618280, guid: 277826572651390469c847467ad04b11, type: 3}
+  defaultDirection: 1
 --- !u!1 &8441361508714454213
 GameObject:
   m_ObjectHideFlags: 0
@@ -788,6 +835,11 @@ MonoBehaviour:
 --- !u!224 &1765066833419126620 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8524089319714877211, guid: fa8a7b580a82d1c429a52446565e3ea6, type: 3}
+  m_PrefabInstance: {fileID: 7941360154284075079}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3345789156421279326 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4637512992048756249, guid: fa8a7b580a82d1c429a52446565e3ea6, type: 3}
   m_PrefabInstance: {fileID: 7941360154284075079}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &4260311035449021151 stripped

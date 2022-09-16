@@ -6,6 +6,7 @@ public abstract class ItemBase : ScriptableObject
 {
     [SerializeField] new string name;
     [SerializeField] string description;
+    [SerializeField] bool usable;
     [SerializeField] Sprite icon;
 
 
@@ -13,6 +14,7 @@ public abstract class ItemBase : ScriptableObject
     public string Description => description;
     public Sprite Icon => icon;
 
+    public bool Usable => usable;
 
     public abstract void Use();
 }

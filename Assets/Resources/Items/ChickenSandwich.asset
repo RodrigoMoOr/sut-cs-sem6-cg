@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: "Bu\u0142a z Kurczakiem"
   description: Restores HP
+  usable: 1
   icon: {fileID: 304400657853117738, guid: 6fb49a1cef5ef6e428d30e8bb7cfcb9f, type: 3}
   hpAmount: 20
   mpAmount: 0

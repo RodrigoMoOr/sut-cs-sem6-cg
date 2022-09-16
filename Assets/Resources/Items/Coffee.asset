@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Coffee
   m_EditorClassIdentifier: 
   name: Kawa
-  description: Restores MP
+  description: Fuel for students. Restores HP
+  usable: 1
   icon: {fileID: -3350700988983938883, guid: 6fb49a1cef5ef6e428d30e8bb7cfcb9f, type: 3}
   hpAmount: 0
   mpAmount: 20
